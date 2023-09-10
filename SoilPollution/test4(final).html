@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Filtered Locations</title>
+</head>
+<body>
+  <h1>Filtered Locations</h1>
+
+  <script>
+
+function filterByCondition(data, property, condition, listName) {
+  // 조건에 맞는 데이터를 담을 배열
+  var filteredList = [];
+
+  // 데이터 배열을 순회하면서 조건에 맞는 데이터를 필터링하여 filteredList에 추가
+  for (var i = 0; i < data.length; i++) {
+    var item = data[i];
+    if (item[property] >= condition) {
+      filteredList.push(item);
+    }
+  }
+
+  // 결과 배열의 이름을 가진 변수에 필터링된 배열을 할당
+  var resultList = filteredList;
+
+  // 결과 배열을 HTML 문서에 출력하거나 다른 용도로 사용할 수 있음
+  console.log(listName + ": ", resultList);
+
+  // 필터링된 배열을 반환
+  return resultList;
+}
+
+//산성토양용 filter
+function filterByCondition_down(data, property, condition, listName) {
+  // 조건에 맞는 데이터를 담을 배열
+  var filteredList = [];
+
+  // 데이터 배열을 순회하면서 조건에 맞는 데이터를 필터링하여 filteredList에 추가
+  for (var i = 0; i < data.length; i++) {
+    var item = data[i];
+    if (item[property] < condition) {
+      filteredList.push(item);
+    }
+  }
+
+  // 결과 배열의 이름을 가진 변수에 필터링된 배열을 할당
+  var resultList = filteredList;
+
+  // 결과 배열을 HTML 문서에 출력하거나 다른 용도로 사용할 수 있음
+  console.log(listName + ": ", resultList);
+
+  // 필터링된 배열을 반환
+  return resultList;
+}
+
+        // 결과 출력 함수
+        function printResults(list, title) {
+          var container = document.createElement("div");
+          var heading = document.createElement("h3");
+          heading.innerHTML = title;
+          container.appendChild(heading);
+          var ul = document.createElement("ul");
+          for (var i = 0; i < list.length; i++) {
+            var item = document.createElement("li");
+            item.innerHTML = list[i].지점명칭;
+            ul.appendChild(item);
+          }
+          container.appendChild(ul);
+          document.body.appendChild(container);
+        }
+
+        //배열의 개수를 출력하는 함수
+        function printArrayLength(list) {
+          var p = document.createElement("p");
+          p.innerHTML = "장소 수 : " + list.length;
+          document.body.appendChild(p);
+        }
+
+    // JSON 파일 불러오기
+    fetch("SoilPollutionData.json")
+      .then(response => response.json())
+      .then(data => {
+      
+        // 1지역
+        var region1Data = data.filter(item => item["지역"].includes("1지역"));
+
+        // 카드뮴 4 이상
+        var region1CardiumList = filterByCondition(region1Data, "카드뮴(mg_kg)", 4, "region1CardiumList");
+        // 구리 150 이상
+        var region1CopperList = filterByCondition(region1Data, "구리(mg_kg)", 150, "region1CopperList");
+        // 비소 25 이상
+        var region1ArsenicList = filterByCondition(region1Data, "비소(mg_kg)", 25, "region1ArsenicList");
+        // 수은 4 이상
+        var region1MercuryList = filterByCondition(region1Data, "수은(mg_kg)", 4, "region1MercuryList");
+        // 납 200 이상
+        var region1LeadList = filterByCondition(region1Data, "납(mg_kg)", 200, "region1LeadList");
+        // 6가크롬 5 이상
+        var region1ChromiumList = filterByCondition(region1Data, "6가크롬(mg_kg)", 5, "region1ChromiumList");
+        // 아연 300 이상
+        var region1ZincList = filterByCondition(region1Data, "아연(mg_kg)", 300, "region1ZincList");
+        // 니켈 100 이상
+        var region1NickelList = filterByCondition(region1Data, "니켈(mg_kg)", 100, "region1NickelList");
+        // 불소 400 이상
+        var region1FluorineList = filterByCondition(region1Data, "불소(mg_kg)", 400, "region1FluorineList");
+        // 유기인화합물 10 이상
+        var region1OrganicCompoundList = filterByCondition(region1Data, "유기인화합물(mg_kg)", 10, "region1OrganicCompoundList");
+        // 폴리크로리네이티드비페닐 1 이상
+        var region1PolyChlorinatedPhenylList = filterByCondition(region1Data, "폴리크로리네이티드비페닐(mg_kg)", 1, "region1PolyChlorinatedPhenylList");
+        // 시안 2 이상
+        var region1CyanideList = filterByCondition(region1Data, "시안(mg_kg)", 2, "region1CyanideList");
+         // 페놀 4 이상
+         var region1PhenolList = filterByCondition(region1Data, "페놀(mg_kg)", 4, "region1PhenolList");
+        // 벤젠 1 이상
+        var region1BenzeneList = filterByCondition(region1Data, "벤젠(mg_kg)", 1, "region1BenzeneList");
+        // 톨루엔 20 이상
+        var region1TolueneList = filterByCondition(region1Data, "톨루엔(mg_kg)", 20, "region1TolueneList");
+        // 에틸벤젠 50 이상
+        var region1EthylbenzeneList = filterByCondition(region1Data, "에틸벤젠(mg_kg)", 50, "region1EthylbenzeneList");
+        // 크실렌 15 이상
+        var region1XyleneList = filterByCondition(region1Data, "크실렌(mg_kg)", 15, "region1XyleneList");
+        // 석유계총탄화수소 500 이상
+        var region1TotalPetroleumHydrocarbonList = filterByCondition(region1Data, "석유계총탄화수소(mg_kg)", 500, "region1TotalPetroleumHydrocarbonList");
+        // 트리클로로에틸렌 8 이상
+        var region1TrichloroethyleneList = filterByCondition(region1Data, "트리클로로에틸렌(mg_kg)", 8, "region1TrichloroethyleneList");
+        // 테트라클로로에틸렌 4 이상
+        var region1TetrachloroethyleneList = filterByCondition(region1Data, "테트라클로로에틸렌(mg_kg)", 4, "region1TetrachloroethyleneList");
+        // 벤조피렌 0.7 이상
+        var region1BenzoapyreneList = filterByCondition(region1Data, "벤조피렌(mg_kg)", 0.7, "region1BenzoapyreneList");
+
+        // 2지역
+        var region2Data = data.filter(item => item["지역"].includes("2지역"));
+
+        // 카드뮴 10 이상
+        var region2CardiumList = filterByCondition(region2Data, "카드뮴(mg_kg)", 10, "region2CardiumList");
+        // 구리 500 이상
+        var region2CopperList = filterByCondition(region2Data, "구리(mg_kg)", 500, "region2CopperList");
+        // 비소 50 이상
+        var region2ArsenicList = filterByCondition(region2Data, "비소(mg_kg)", 50, "region2ArsenicList");
+        // 수은 10 이상
+        var region2MercuryList = filterByCondition(region2Data, "수은(mg_kg)", 10, "region2MercuryList");
+        // 납 400 이상
+        var region2LeadList = filterByCondition(region2Data, "납(mg_kg)", 400, "region2LeadList");
+        // 6가크롬 15 이상
+        var region2ChromiumList = filterByCondition(region2Data, "6가크롬(mg_kg)", 15, "region2ChromiumList");
+        // 아연 600 이상
+        var region2ZincList = filterByCondition(region2Data, "아연(mg_kg)", 600, "region2ZincList");
+        // 니켈 200 이상
+        var region2NickelList = filterByCondition(region2Data, "니켈(mg_kg)", 200, "region2NickelList");
+        // 불소 400 이상
+        var region2FluorineList = filterByCondition(region2Data, "불소(mg_kg)", 400, "region2FluorineList");
+        // 유기인화합물 10 이상
+        var region2OrganicCompoundList = filterByCondition(region2Data, "유기인화합물(mg_kg)", 10, "region2OrganicCompoundList");
+        // 폴리크로리네이티드비페닐 4 이상
+        var region2PolyChlorinatedPhenylList = filterByCondition(region2Data, "폴리크로리네이티드비페닐(mg_kg)", 4, "region2PolyChlorinatedPhenylList");
+        // 시안 2 이상
+        var region2CyanideList = filterByCondition(region2Data, "시안(mg_kg)", 2, "region2CyanideList");
+        // 페놀 4 이상
+        var region2PhenolList = filterByCondition(region2Data, "페놀(mg_kg)", 4, "region2PhenolList");
+        // 벤젠 1 이상
+        var region2BenzeneList = filterByCondition(region2Data, "벤젠(mg_kg)", 1, "region2BenzeneList");
+        // 톨루엔 20 이상
+        var region2TolueneList = filterByCondition(region2Data, "톨루엔(mg_kg)", 20, "region2TolueneList");
+        // 에틸벤젠 50 이상
+        var region2EthylbenzeneList = filterByCondition(region2Data, "에틸벤젠(mg_kg)", 50, "region2EthylbenzeneList");
+        // 크실렌 15 이상
+        var region2XyleneList = filterByCondition(region2Data, "크실렌(mg_kg)", 15, "region2XyleneList");
+
+         // 석유계총탄화수소 500 이상
+         var region2TotalPetroleumHydrocarbonList = filterByCondition(region2Data, "석유계총탄화수소(mg_kg)", 500, "region2TotalPetroleumHydrocarbonList");
+        // 트리클로로에틸렌 10 이상
+        var region2TrichloroethyleneList = filterByCondition(region2Data, "트리클로로에틸렌(mg_kg)", 10, "region2TrichloroethyleneList");
+        // 테트라클로로에틸렌 6 이상
+        var region2TetrachloroethyleneList = filterByCondition(region2Data, "테트라클로로에틸렌(mg_kg)", 6, "region2TetrachloroethyleneList");
+        // 벤조피렌 1 이상
+        var region2BenzoapyreneList = filterByCondition(region2Data, "벤조피렌(mg_kg)", 1, "region2BenzoapyreneList");
+
+        // 3지역인 경우
+    var region3Data = data.filter(item => item["지역"].includes("3지역"));
+
+            // 카드뮴 값이 60 이상인 경우 지점명칭 추출
+            var region3CardiumList = filterByCondition(region3Data, "카드뮴(mg_kg)", 60, "region3CardiumList");
+            // 구리 값이 2000 이상인 경우 지점명칭 추출
+            var region3CopperList = filterByCondition(region3Data, "구리(mg_kg)", 2000, "region3CopperList");
+            // 비소 값이 200 이상인 경우 지점명칭 추출
+            var region3ArsenicList = filterByCondition(region3Data, "비소(mg_kg)", 200, "region3ArsenicList");
+            // 수은 값이 20 이상인 경우 지점명칭 추출
+            var region3MercuryList = filterByCondition(region3Data, "수은(mg_kg)", 20, "region3MercuryList");
+            // 납 값이 700 이상인 경우 지점명칭 추출
+            var region3LeadList = filterByCondition(region3Data, "납(mg_kg)", 700, "region3LeadList");
+            // 6가크롬 값이 40 이상인 경우 지점명칭 추출
+            var region3ChromiumList = filterByCondition(region3Data, "6가크롬(mg_kg)", 40, "region3ChromiumList");
+            // 아연 값이 2000 이상인 경우 지점명칭 추출
+            var region3ZincList = filterByCondition(region3Data, "아연(mg_kg)", 2000, "region3ZincList");
+            // 니켈 값이 500 이상인 경우 지점명칭 추출
+            var region3NickelList = filterByCondition(region3Data, "니켈(mg_kg)", 500, "region3NickelList");
+            // 불소 값이 800 이상인 경우 지점명칭 추출
+            var region3FluorineList = filterByCondition(region3Data, "불소(mg_kg)", 800, "region3FluorineList");
+            // 유기인화합물 값이 30 이상인 경우 지점명칭 추출
+            var region3OrganicCompoundList = filterByCondition(region3Data, "유기인화합물(mg_kg)", 30, "region3OrganicCompoundList");
+            // 폴리크로리네이티드비페닐 값이 12 이상인 경우 지점명칭 추출
+            var region3PolyChlorinatedPhenylList = filterByCondition(region3Data, "폴리크로리네이티드비페닐(mg_kg)", 12, "region3PolyChlorinatedPhenylList");
+            // 시안 값이 120 이상인 경우 지점명칭 추출
+            var region3CyanideList = filterByCondition(region3Data, "시안(mg_kg)", 120, "region3CyanideList");
+            // 페놀 값이 20 이상인 경우 지점명칭 추출
+            var region3PhenolList = filterByCondition(region3Data, "페놀(mg_kg)", 20, "region3PhenolList");
+            // 벤젠 값이 3 이상인 경우 지점명칭 추출
+            var region3BenzeneList = filterByCondition(region3Data, "벤젠(mg_kg)", 3, "region3BenzeneList");
+            // 톨루엔 값이 60 이상인 경우 지점명칭 추출
+            var region3TolueneList = filterByCondition(region3Data, "톨루엔(mg_kg)", 60, "region3TolueneList");
+            // 에틸벤젠 값이 340 이상인 경우 지점명칭 추출
+            var region3EthylbenzeneList = filterByCondition(region3Data, "에틸벤젠(mg_kg)", 340, "region3EthylbenzeneList");
+            // 크실렌 값이 45 이상인 경우 지점명칭 추출
+            var region3XyleneList = filterByCondition(region3Data, "크실렌(mg_kg)", 45, "region3XyleneList");
+            // 석유계총탄화수소 값이 2000 이상인 경우 지점명칭 추출
+            var region3TotalPetroleumHydrocarbonList = filterByCondition(region3Data, "석유계총탄화수소(mg_kg)", 2000, "region3TotalPetroleumHydrocarbonList");
+            // 트리클로로에틸렌 값이 40 이상인 경우 지점명칭 추출
+            var region3TrichloroethyleneList = filterByCondition(region3Data, "트리클로로에틸렌(mg_kg)", 40, "region3TrichloroethyleneList");
+            // 테트라클로로에틸렌 값이 25 이상인 경우 지점명칭 추출
+            var region3TetrachloroethyleneList = filterByCondition(region3Data, "테트라클로로에틸렌(mg_kg)", 25, "region3TetrachloroethyleneList");
+            // 벤조피렌 값이 7 이상인 경우 지점명칭 추출
+            var region3BenzoapyreneList = filterByCondition(region3Data, "벤조피렌(mg_kg)", 7, "region3BenzoapyreneList");
+
+        // 결과 출력
+        printResults(region1CardiumList, "1지역 - 카드뮴 4 이상");
+        printResults(region1CopperList, "1지역 - 구리 150 이상");
+        printResults(region1ArsenicList, "1지역 - 비소 25 이상");
+        printResults(region1MercuryList, "1지역 - 수은 4 이상");
+        printResults(region1LeadList, "1지역 - 납 200 이상");
+        printResults(region1ChromiumList, "1지역 - 6가크롬 5 이상");
+        printResults(region1ZincList, "1지역 - 아연 300 이상");
+        printResults(region1NickelList, "1지역 - 니켈 100 이상");
+        printResults(region1FluorineList, "1지역 - 불소 400 이상");
+        printResults(region1OrganicCompoundList, "1지역 - 유기인화합물 10 이상");
+        printResults(region1PolyChlorinatedPhenylList, "1지역 - 폴리크로리네이티드비페닐 1 이상");
+        printResults(region1CyanideList, "1지역 - 시안 2 이상");
+        printResults(region1PhenolList, "1지역 - 페놀 4 이상");
+        printResults(region1BenzeneList, "1지역 - 벤젠 1 이상");
+        printResults(region1TolueneList, "1지역 - 톨루엔 20 이상");
+        printResults(region1EthylbenzeneList, "1지역 - 에틸벤젠 50 이상");
+        printResults(region1XyleneList, "1지역 - 크실렌 15 이상");
+        printResults(region1TotalPetroleumHydrocarbonList, "1지역 - 석유계총탄화수소 500 이상");
+        printResults(region1TrichloroethyleneList, "1지역 - 트리클로로에틸렌 8 이상");
+        printResults(region1TetrachloroethyleneList, "1지역 - 테트라클로로에틸렌 4 이상");
+        printResults(region1BenzoapyreneList, "1지역 - 벤조피렌 0.7 이상");
+
+        printResults(region2CardiumList, "2지역 - 카드뮴 10 이상");
+        printResults(region2CopperList, "2지역 - 구리 500 이상");
+        printResults(region2ArsenicList, "2지역 - 비소 50 이상");
+        printResults(region2MercuryList, "2지역 - 수은 10 이상");
+        printResults(region2LeadList, "2지역 - 납 400 이상");
+        printResults(region2ChromiumList, "2지역 - 6가크롬 15 이상");
+        printResults(region2ZincList, "2지역 - 아연 600 이상");
+        printResults(region2NickelList, "2지역 - 니켈 200 이상");
+        printResults(region2FluorineList, "2지역 - 불소 400 이상");
+        printResults(region2OrganicCompoundList, "2지역 - 유기인화합물 10 이상");
+        printResults(region2PolyChlorinatedPhenylList, "2지역 - 폴리크로리네이티드비페닐 4 이상");
+        printResults(region2CyanideList, "2지역 - 시안 2 이상");
+        printResults(region2PhenolList, "2지역 - 페놀 4 이상");
+        printResults(region2BenzeneList, "2지역 - 벤젠 1 이상");
+        printResults(region2TolueneList, "2지역 - 톨루엔 20 이상");
+        printResults(region2EthylbenzeneList, "2지역 - 에틸벤젠 50 이상");
+        printResults(region2XyleneList, "2지역 - 크실렌 15 이상");
+        printResults(region2TotalPetroleumHydrocarbonList, "2지역 - 석유계총탄화수소 500 이상");
+        printResults(region2TrichloroethyleneList, "2지역 - 트리클로로에틸렌 10 이상");
+        printResults(region2TetrachloroethyleneList, "2지역 - 테트라클로로에틸렌 6 이상");
+        printResults(region2BenzoapyreneList, "2지역 - 벤조피렌 1 이상");
+
+        printResults(region3CardiumList, "3지역 - 카드뮴 60 이상");
+        printResults(region3CopperList, "3지역 - 구리 2000 이상");
+        printResults(region3ArsenicList, "3지역 - 비소 200 이상");
+        printResults(region3MercuryList, "3지역 - 수은 20 이상");
+        printResults(region3LeadList, "3지역 - 납 700 이상");
+        printResults(region3ChromiumList, "3지역 - 6가크롬 40 이상");
+        printResults(region3ZincList, "3지역 - 아연 2000 이상");
+        printResults(region3NickelList, "3지역 - 니켈 500 이상");
+        printResults(region3FluorineList, "3지역 - 불소 800 이상");
+        printResults(region3OrganicCompoundList, "3지역 - 유기인화합물 30 이상");
+        printResults(region3PolyChlorinatedPhenylList, "3지역 - 폴리크로리네이티드비페닐 12 이상");
+        printResults(region3CyanideList, "3지역 - 시안 120 이상");
+        printResults(region3PhenolList, "3지역 - 페놀 20 이상");
+        printResults(region3BenzeneList, "3지역 - 벤젠 3 이상");
+        printResults(region3TolueneList, "3지역 - 톨루엔 60 이상");
+        printResults(region3EthylbenzeneList, "3지역 - 에틸벤젠 340 이상");
+        printResults(region3XyleneList, "3지역 - 크실렌 45 이상");
+        printResults(region3TotalPetroleumHydrocarbonList, "3지역 - 석유계총탄화수소 2000 이상");
+        printResults(region3TrichloroethyleneList, "3지역 - 트리클로로에틸렌 40 이상");
+        printResults(region3TetrachloroethyleneList, "3지역 - 테트라클로로에틸렌 25 이상");
+        printResults(region3BenzoapyreneList, "3지역 - 벤조피렌 7 이상");
+
+       //산성토양: PH값이 7미만인 경우 지점명칭 추출
+        var regionAcidSoilList = filterByCondition_down(data,"수소이온농도(pH)", 7, regionAcidSoilList);
+        printResults(regionAcidSoilList, "산성토양 - 수소이온농도 7미만 지역");
+        printArrayLength(regionAcidSoilList);
+
+        regionAcidSoilList = filterByCondition_down(data,"수소이온농도(pH)", 6.5, regionAcidSoilList);
+        printResults(regionAcidSoilList, "산성토양 - 수소이온농도 6.5미만 지역");
+        printArrayLength(regionAcidSoilList);
+
+        regionAcidSoilList = filterByCondition_down(data,"수소이온농도(pH)", 5.5, regionAcidSoilList);
+        printResults(regionAcidSoilList, "산성토양 - 수소이온농도 5.5미만 지역");
+        printArrayLength(regionAcidSoilList);
+
+        regionAcidSoilList = filterByCondition_down(data,"수소이온농도(pH)", 4.5, regionAcidSoilList);
+        printResults(regionAcidSoilList, "산성토양 - 수소이온농도 4.5미만 지역");
+        printArrayLength(regionAcidSoilList);
+
+  
+        
+    });
+</script>
+</body>
+</html>

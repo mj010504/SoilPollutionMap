@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>대구의 오염지역</title>
+</head>
+
+<body>
+    <div id="map" style="width:100%;height:650px;"></div>
+    <p id="result"></p>
+    <script type="text/javascript"
+        src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=6c60f8a7029c374545889929510fffb0&libraries=services&libraries=services"></script>
+    <script>
+        
+        function printDensity(data, property, position) {
+            for (let i = 0; i < data.length; i++) {
+                var item = data[i];
+                if (item[property] == position.title) {
+                    var message = item['지점명칭'] + "<br>" + "오염물질 농도" + "<br>" + "카드뮴: " + item['카드뮴(mg_kg)'] + "," + " 구리: " + item['구리(mg_kg)'] + "," + " 비소: " + item['비소(mg_kg)'] + "," + " 수은: " + item['수은(mg_kg)']
+                        + "," + " 납: " + item['납(mg_kg)'] + "," + " 아연: " + item['아연(mg_kg)'] + "," + " 니켈: " + item['니켈(mg_kg)'] + "," + " 불소: " + item['불소(mg_kg)']
+                        + "," + " 유기인화합물: " + item['유기인(mg_kg)'] + "," + " 폴리크로리네이티드비페닐: " + item['폴리클로리네이티드비페닐(PCBs)(mg_kg)'] + ","
+                        + " 시안: " + item['시안(mg_kg)'] + "," + " 페놀: " + item['페놀류(mg_kg)'] + "," + " 벤젠: " + item['벤젠(mg_kg)'] + "," + " 톨루엔: " + item['톨루엔(mg_kg)'] + "," +
+                        " 에틸벤젠: " + item['에틸벤젠(mg_kg)'] + "," + " 크실렌: " + item['크실렌(mg_kg)'] + "," + " 석유계총탄화수소: " + item['석유계총탄화수소(TPH)(mg_kg)'] + ","
+                        + " 트리클로로에틸렌: " + item['트리클로로에틸렌(TCE)(mg_kg)'] + "," + " 테트라클로로에틸렌: " + item['테트라클로로에틸렌(PCE)(mg_kg)'];
+
+                    var resultDiv = document.getElementById('result');
+                    resultDiv.innerHTML = message;
+
+                    var infowindow = new kakao.maps.InfoWindow({
+                                    content: '<div style = "height:70px">' + item['지점명칭'],
+                                    removable: true
+                                });
+                            // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+                                infowindow.open(map, marker);
+                }
+            }
+        }
+
+        var mapContainer = document.getElementById('map'); // 지도를 표시할 div  
+        var mapOption = {
+            center: new kakao.maps.LatLng(35.8479550, 128.583434), // 지도의 중심좌표
+            level: 8 // 지도의 확대 레벨
+        };
+
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+        // 마커를 표시할 위치와 title 객체 배열입니다 
+        var positions = [{
+            title: '삼진환경산업',
+            latlng: new kakao.maps.LatLng(35.7497206, 128.410651),
+            area: 3583
+        }];
+
+        // 마커 이미지의 이미지 주소입니다
+        var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+        fetch("s.json")
+            .then(response => response.json())
+            .then(data => {
+                for (let i = 0; i < positions.length; i++) {
+                    // 마커 이미지의 이미지 크기 입니다
+                    var imageSize = new kakao.maps.Size(24, 35);
+
+                    // 마커 이미지를 생성합니다    
+                    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+                    // 마커를 생성합니다
+                    var marker = new kakao.maps.Marker({
+                        map: map, // 마커를 표시할 지도
+                        position: positions[i].latlng, // 마커를 표시할 위치
+                        title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                        image: markerImage // 마커 이미지 
+                    });
+
+                    // 지도에 표시할 원을 생성합니다
+                    var circle = new kakao.maps.Circle({
+                        center: positions[i].latlng, // 원의 중심좌표 입니다 
+                        radius: Math.sqrt(positions[i].area / 3.14) + 500, // 미터 단위의 원의 반지름입니다 
+                        strokeWeight: 5, // 선의 두께입니다 
+                        strokeColor: '#75B8FA', // 선의 색깔입니다
+                        strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+                        strokeStyle: 'dashed', // 선의 스타일입니다
+                        fillColor: '#CFE7FF', // 채우기 색깔입니다
+                        fillOpacity: 0.7 // 채우기 불투명도 입니다   
+                    });
+
+                    // 지도에 원을 표시합니다 
+                    circle.setMap(map);
+
+                  
+                    kakao.maps.event.addListener(circle, 'click', function (mouseEvent) {
+                        printDensity(data, "지점명칭", positions[i]);
+                       
+                });
+                }
+            });
+    </script>
+</body>
+
+</html>

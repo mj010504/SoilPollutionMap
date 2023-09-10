@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+  <title>토양오염 피해사례</title>
+  <style>
+    body {
+        margin-top: 0px;
+        background-color:white;
+    }
+
+    h3 {
+        font-size: 25px;
+        padding: 20px ;
+        text-align : center;
+        margin: 0;
+        display: block;
+        background: gray;
+        color: white;
+    }
+
+    div.pollutionCase {
+       
+        background-color: white;
+        border: 0.3px solid black;
+        margin: 20px;
+        padding: 15px;
+        display: block;
+        width: fit-content;
+
+    }
+
+    .popup {
+        position: relative;
+      display: none;
+      width: 70%;
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid brown;
+      border-radius: 6px;
+    }
+
+    .collapse-btn {
+        display: block;
+  position: absolute;
+  top: 1%;
+  right: 1%;
+}
+
+a {
+    font-weight: bold;
+}
+
+footer {
+    width: 100%;
+    padding: 30px;
+    border-top: 0.1px solid black;
+    text-align: center;
+    color: brown;
+   }
+
+   span.foot {
+    font-size: 15px;
+    margin : 0 auto;
+    font-weight: bold;
+   }
+  
+    </style>
+
+    <script>
+        function showPopup(id) {
+    var popup = document.getElementById(id);
+    if (popup) {
+        popup.style.display = "block";
+    }
+    }
+
+    function toggleCollapse(id) {
+  var popup = document.getElementById(id);
+  var collapseBtn = popup.querySelector('.collapse-btn');
+  var content = popup.querySelector('p');
+
+  if (content.style.display === 'none') {
+    content.style.display = 'block';
+    collapseBtn.textContent = '접기';
+  } else {
+    popup.style.display = "none";
+  }
+}
+
+    </script>
+
+    </head>
+
+    <body>
+
+        <h3>토양오염 피해사례</h3>
+
+        <div class = "pollutionCase" onclick="showPopup('popup1')">
+            러브 커넬 사건	
+        </div>
+
+        <div class="popup" id="popup1">
+            <p>
+             
+        미국과 캐나다의 국경에 위치한 나이아가라 폭포는 세계에서 가장 큰 폭포로서, 그 장엄함으로 널리 알려져 있다. 북미 대륙의 오대호 중에서 애리호와 온타리오호를 연결하는 이 폭포는 85미터에 달하는 두 호수 수면의 고도 차이로 인하여 낙차가 매우 크다. 또한 이 폭포가 없다면 미국 중부 대륙에서 대서양을 연안까지 선박이 자유롭게 운항을 할 수 있다.
+
+        이 점에 착안하여 1892년 윌리암 러브(William T. Love)라는 야심많은 사업가가 이곳에 7마일(약 10킬로미터)에 상당하는 운하를 건설하여 선박을 운항하고 발전소를 세우는 계획을 추진했다. 운하가 1마일 정도 만들어져 갈 무렵 이 회사의 재정적 어려움으로 러브는 길이 1마일, 너비 15야드, 깊이 10∼40피트의 러브 커넬(Love Canel)이라 불리는 불명예스런 웅덩이만 남기고 1910년 사업을 중단하고 말았다. 1940년대에 들어와 후크케미칼이라는 화학회사에서 인수하여 공장에서 버리는 화학 물질을 이 운하에 매립한 후 1953년에 이 주변의 땅과 함께 시교육위원회에 기증하였다.
+
+        몇 년 후 이 땅이 초등학교와 주택지로 사용하였다. 1970년대에 연못이나 토양에서는 유해한 화학 물질이 다량 검출되고 이 지역의 주민들은 두통과 피부병이 발병하였고 신체의 통증을 호소하였다. 그러나 학교나 시 당국에서는 아무런 조치를 취하지 않았다.
+
+        한 학부모가 아들의 질병이 화학 물질이라고 생각하고 전학을 요구했으나 무시당하자 학교의 폐쇄를 청원하기로 결심하고 학생들의 건강 상태를 조사한 결과 아이들이 각종 질병에 시달리고 있음을 알게 되었다. 또한 유산율도 타지역에 비해 4배가 높고 선천성 기형아의 출산도 높았다. 결국 1978년 미국 역사상 처음으로 환경 재난 지역으로 선포하고 주민들을 이주시키고 정화를 위해 1억 달러 이상을 소모하였으나 지금까지 아무도 들어가지 못하는 유령 도시로 남아 있다.
+
+        
+         </p>
+         
+         <button class="collapse-btn" onclick="toggleCollapse('popup1')">접기</button>
+         
+         </div>
+        <div class = "pollutionCase" onclick="showPopup('popup2')">
+            부산 홈플러스 토지오염으로 인한 건설 중단 사례
+        </div>
+
+        <div class="popup" id="popup2">
+            <p>
+                부산 도심 홈플러스 건설현장에서 대규모 오염토양이 발견되어 정밀조사명령 후 공사가 전면 중단됐다. 신축공사 현장 일대에서 석유계총탄화수소(TPH)와 카드뮴, 납 등 중금속이 검출됐고, 최근 대한색소공업㈜에 토양오염 정밀조사명령을 내렸다. 명령서에는 TPH는 기준치를 초과했고, 카드뮴과 납은 기준초과가 우려됨을 명시했다.
+                
+            </p>
+            <a href = "https://www.segye.com/newsView/20110419004948" target="_blank">뉴스 : [단독] 부산 도심 건설현장 토양오염… 공사 중단사태</a>
+
+            <button class="collapse-btn" onclick="toggleCollapse('popup2')">접기</button>
+        </div>
+        
+
+        <div class = "pollutionCase" onclick="showPopup('popup3')">
+            경북 영주시 돼지농가 가축무덤터 토양오염 사건
+        </div>
+
+        <div class="popup" id="popup3">
+            <p>
+                경북 영주시 안정면의 한 돼지농가 가축무덤터에 돼지 2933마리를 묻었다가 부실한 매몰로 침출수가 솟구쳐 매몰지를 통째로 해체했다. 침출수로 지하수와 토양이 오염되어 매몰지 태두리와 인근 논에 핏물이 보였고 사체 내에서 흘러나온 침출수가 땅속에 스며들었다. 식물들은 죽어나갔으며 땅이 썩어가고 있었다. 근처 주민들이 먹는 식수와 전염병등의 발생확률이 높아 문제가 되었다.
+            </p>
+            <a href = "https://m.khan.co.kr/national/health-welfare/article/201102182148325#c2b" target="_blank">뉴스 : 경북 영주, 뒷수습도 ‘땜질’… 침출수 계속 쏟아져</a>
+
+            <button class="collapse-btn" onclick="toggleCollapse('popup3')">접기</button>
+        </div>
+        
+        <div class = "pollutionCase" onclick="showPopup('popup4')">
+            광명시 가학광산의 토양오염 사건
+        </div>
+
+        <div class="popup" id="popup4">
+            <p>
+                광산에서 유출된 카드뮴이 토양에 흡수되면서 인근 주민들에게 피해를 입혔다.
+            </p>
+
+            <a href = "https://www.hankookilbo.com/News/Read/200406170074725184" target="_blank">뉴스 : '최악 폐광오염' 10년뒤…광명 가학동 르포</a> 
+            <button class="collapse-btn" onclick="toggleCollapse('popup4')">접기</button> 
+              </div>
+              
+        
+        <div class = "pollutionCase" onclick="showPopup('popup5')">
+            의왕시 제일모직 부지의 토양오염 사건
+        </div>
+
+        <div class="popup" id="popup5">
+            <p>
+                경기도 의왕시의 한 화학공장 기름탱크에서 새어나온 기름이
+                지하로 5백m이상을 번져나가 주변 1만3천여평의 토양을 크게 오
+                염시켰다.
+                
+            </p>
+            <a href = "https://www.chosun.com/site/data/html_dir/1998/10/23/1998102370242.html" target="_blank">뉴스 : 의왕시 주변 1만여평 '죽음의 땅'</a>  
+
+            <button class="collapse-btn" onclick="toggleCollapse('popup5')">접기</button>
+        </div>
+        
+        <footer>
+            <span class ="foot">토양오염지도</span>
+            </footer>
+
+    </body>
